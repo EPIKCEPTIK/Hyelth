@@ -1,0 +1,31 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <title>Login</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'main/css/authentication.css' %}">
+
+</head>
+<body>
+<div class="site-cabinet">
+  <div class="top-bar">
+    <div class="top-bar__title">Вхід у систему</div>
+  </div>
+  <div class="auth-container">
+    <form method="POST" autocomplete="off" class="auth-form">
+      <h1>Login</h1>
+      {% csrf_token %}
+      {{ login_form.as_p }}
+      <div id="check">
+        <p>Немає аккаунта?</p>
+        <a href="{% url 'registration' %}">Створити</a>
+      </div>
+      <button type="submit">Login</button>
+    </form>
+  </div>
+</div>
+</body>
+</html>
+

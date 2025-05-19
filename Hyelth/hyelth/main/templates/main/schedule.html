@@ -1,0 +1,75 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Особистий кабінет</title>
+   <link rel="stylesheet" href="{% static 'main/css/cabinet.css' %}">
+</head>
+<body>
+  <div class="site-cabinet">
+    <header class="top-bar">
+      <h1 class="top-bar__title">Hyelth</h1>
+      <a href="{% url 'user_logout' %}">Logout</a>
+    </header>
+
+    <div class="content-wrapper">
+      <aside class="side-bar">
+        <nav class="nav-menu">
+          <a href="{% url 'cabinet' %}" class="nav-menu__item">Cabinet</a>
+          <a href="{% url 'schedule' %}" class="nav-menu__item nav-menu__item--active">Schedule</a>
+          <a href="{% url 'prescriptions' %}" class="nav-menu__item">Prescriptions</a>
+          <a href="{% url 'find_medicine' %}" class="nav-menu__item">Find Medicine</a>
+        </nav>
+      </aside>
+
+      <main class="main">
+        <div class="main-content">
+          <!-- Ліва колонка: графік/розклад і календар -->
+          <div class="main-left">
+            <div class="schedule">
+              <p><span class="dot">●</span>1 PM</p>
+              <!-- Додаткові години... -->
+            </div>
+            <div class="calendar">
+              <h3>May 2025</h3>
+              <table>
+                <tr>
+                  <th>Su</th><th>Mo</th><th>Tu</th><th>We</th><th>Th</th><th>Fr</th><th>Sa</th>
+                </tr>
+                <!-- Ряди днів... -->
+                <tr>
+                  <td>11</td><td>12</td><td>13</td><td class="active">14</td><td>15</td><td>16</td><td>17</td>
+                </tr>
+              </table>
+            </div>
+          </div>
+
+          <!-- Права колонка: картки ліків -->
+          <div class="main-right">
+            <div class="frame-row">
+              {% for med in medicines %}
+                <div class="medicine-card">
+                  <img src="{{ med.image.url }}" alt="{{ med.name }}" class="medicine-card__image">
+                  <div class="medicine-card__name">{{ med.name }}</div>
+                  <div class="medicine-card__info">
+                    <span class="medicine-card__label">Exp:</span>
+                    <span class="medicine-card__value">{{ med.expiration|date:"d.m.Y" }}</span>
+                  </div>
+                  <div class="medicine-card__info">
+                    <span class="medicine-card__label">Qty:</span>
+                    <span class="medicine-card__value">{{ med.quantity }}</span>
+                  </div>
+                </div>
+              {% empty %}
+                <p>Немає ліків у кабінеті.</p>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+</body>
+</html>
