@@ -15,10 +15,10 @@ Cabinet
     {% for med in medicines %}
     <div class="medicine-card">
       <img src="{{ med.image.url }}" alt="{{ med.name }}" class="medicine-card__image">
-      <div class="medicine-card__name"><a href="{% url 'medicine_details' med.pk %}">{{ med.name }}</a></div>
+      <div class="medicine-card__name"><a href="{% url 'medicine_details' med.id %}">{{ med.name }}</a></div>
       <div class="medicine-card__info">
         <span class="medicine-card__label">Exp:</span>
-        <span class="medicine-card__value">{{ med.expiration|date:"d.m.Y" }}</span>
+        <span class="medicine-card__value">{{ med.expiration }}</span>
       </div>
       <div class="medicine-card__info">
         <span class="medicine-card__label">Qty:</span>
