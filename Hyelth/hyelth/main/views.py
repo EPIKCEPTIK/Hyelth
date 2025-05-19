@@ -12,15 +12,18 @@ def cabinet(request):
     return render(request, 'main/cabinet.html', {
         'medicines': medicines
     })
+    
 @login_required(login_url='login')
 def schedule(request):
     medicines = Medicine.objects.all().order_by('name')
     return render(request, 'main/schedule.html', {
         'medicines': medicines
     })
+    
 @login_required(login_url='login')
 def prescriptions(request):
     return render(request, 'main/prescriptions.html')
+
 @login_required(login_url='login')
 def find_medicine(request):
     medicines = MedicineDetail.objects.all().order_by('name')
