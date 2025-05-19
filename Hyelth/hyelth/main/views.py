@@ -1,16 +1,30 @@
 from django.shortcuts import render, redirect
-from .models import Medicine, MedicineDetail
+from .models import *
 from . forms import CreateUserForm, LoginForm
 from django.views.generic.detail import DetailView
-from django.contrib.auth.models import  auth
+from django.contrib.auth import get_user_model
+User = get_user_model()
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
+from django.forms.models import model_to_dict
+import json
 
 @login_required(login_url='login')
 def cabinet(request):
-    medicines = Medicine.objects.all().order_by('name')
+    userMedicines = json.loads(request.user.medicines)
+    ids = [int(med["id"]) for med in userMedicines]
+    medicines = Medicine.objects.filter(id__in=set(ids))
+    med_lookup = {med.id: med for med in medicines}
+    result = [med_lookup.get(id) for id in ids]
+    result_dicts = [model_to_dict(med) for med in result]
+    print(userMedicines)
+    print(result_dicts)
+    for i in range(len(result_dicts)):
+        result_dicts[i]['quantity'] = userMedicines[i]["quantity"]
+        result_dicts[i]['expiration'] = userMedicines[i]["exp"]
+    print(result_dicts)
     return render(request, 'main/cabinet.html', {
-        'medicines': medicines
+        'medicines': result_dicts
     })
     
 @login_required(login_url='login')
@@ -26,7 +40,7 @@ def prescriptions(request):
 
 @login_required(login_url='login')
 def find_medicine(request):
-    medicines = MedicineDetail.objects.all().order_by('name')
+    medicines = Medicine.objects.all().order_by('name')
     return render(request, 'main/find_medicine.html', {
         'medicines': medicines
     })
@@ -62,5 +76,20 @@ def user_logout(request):
     return redirect('login')
 
 class MedicineDetailView(DetailView):
-    model = MedicineDetail
+    model = Medicine
     template_name = 'main/medicine_details.html'
+    
+def add_medicine(request, id, date):
+    
+    userMedicines = json.loads(request.user.medicines)
+    print(userMedicines)
+    userMedicines.append({"id":str(id),"made_on":str(date)})
+    print(userMedicines)
+    userMedicines = json.dumps(userMedicines)
+    print(userMedicines)
+    
+    user = request.user
+    user.medicines = userMedicines
+    user.save()
+    
+    return redirect('cabinet')
