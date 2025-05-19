@@ -1,2 +1,2 @@
 # Hyelth
-Hyelth for Ibana Scherbyna
+Hyelth for Yebana Scherbyna
