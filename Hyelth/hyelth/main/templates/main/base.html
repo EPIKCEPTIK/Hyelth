@@ -1,0 +1,36 @@
+
+{% load static %}
+<!DOCTYPE html>
+
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Особистий кабінет</title>
+    <link rel="stylesheet" href="{% static 'main/css/cabinet.css' %}">
+</head>
+<body>
+ <div class="site-cabinet">
+
+    <header class="top-bar">
+      <h1 class="top-bar__title">Hyelth</h1>
+        <a href = "{% url 'user_logout' %}">Logout</a>
+    </header>
+
+    <div class="content-wrapper">
+      <aside class="side-bar">
+        <nav class="nav-menu">
+          <a href="{% url 'cabinet' %}" class="nav-menu__item nav-menu__item--active">Cabinet</a>
+          <a href="{% url 'schedule' %}" class="nav-menu__item">Schedule</a>
+          <a href="{% url 'prescriptions' %}" class="nav-menu__item">Prescriptions</a>
+          <a href="{% url 'find_medicine' %}" class="nav-menu__item">Find Medicine</a>
+        </nav>
+      </aside>
+
+      {% block content %}
+      {% endblock %}
+    </div>
+  </div>
+
+
+</body>
+</html>
