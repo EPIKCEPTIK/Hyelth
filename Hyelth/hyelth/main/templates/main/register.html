@@ -1,0 +1,31 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <title>Register</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'main/css/authentication.css' %}">
+
+</head>
+<body>
+<div class="site-cabinet">
+  <div class="top-bar">
+    <div class="top-bar__title">Створення акаунту</div>
+  </div>
+  <div class="auth-container">
+    <form method="POST" autocomplete="off" class="auth-form">
+      <h1>Register</h1>
+      {% csrf_token %}
+      {{ registration_form.as_p }}
+      <div id="check">
+        <p class="check">Є аккаунт?</p>
+        <a href="{% url 'login' %}">Ввійти</a>
+      </div>
+      <button type="submit">Register</button>
+    </form>
+  </div>
+</div>
+</body>
+</html>
+
