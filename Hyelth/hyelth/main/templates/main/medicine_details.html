@@ -7,10 +7,17 @@
 
 {% block content%}
 <main>
-  <h1>{{ object.name }}</h1>
-  <img src="{{ object.image.url }}" alt="{{ med.name }}" class="medicine-card__image">
-  <p>Кількість: {{ object.quantity }}</p>
-  <p>Детальна інформація: {{ object.description }}</p>
-  <p>Термін придатності: {{ object.expiration }}</p>
+  {{ medicine.id }}
+  <h1>{{ medicine.name }}</h1>
+  <img src="{{ medicine.image.url }}" alt="{{ med.name }}" class="medicine-card__image">
+  <p>Кількість: {{ medicine.quantity }}</p>
+  <p>Детальна інформація: {{ medicine.description }}</p>
+  <p>Термін придатності: {{ medicine.expiration }}</p>
+  <form method="POST">
+    {% csrf_token %}
+    <input type="text" name="date">
+    <input type="number" name="quantity">
+    <button type="submit">Add Medicine</button>
+  </form>
 </main>
   {% endblock %}

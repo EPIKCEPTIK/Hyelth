@@ -18,10 +18,13 @@ def cabinet(request):
     result = [med_lookup.get(id) for id in ids]
     result_dicts = [model_to_dict(med) for med in result]
     print(userMedicines)
+    print("----------------")
     print(result_dicts)
     for i in range(len(result_dicts)):
+        print(result_dicts[i])
+        print(userMedicines[i])
         result_dicts[i]['quantity'] = userMedicines[i]["quantity"]
-        result_dicts[i]['expiration'] = userMedicines[i]["exp"]
+        result_dicts[i]['expiration'] = userMedicines[i]["made_on"]
     print(result_dicts)
     return render(request, 'main/cabinet.html', {
         'medicines': result_dicts
@@ -75,21 +78,38 @@ def user_logout(request):
     auth.logout(request)
     return redirect('login')
 
+def MedicineDetail(request,mid):
+    if request.method == "POST":
+        userMedicines = json.loads(request.user.medicines)
+        print("METHOD------------------")
+        print(request.method)
+        userMedicines.append({"id":str(mid),"made_on":0,"quantity":request.POST['quantity']})
+        userMedicines = json.dumps(userMedicines)
+        
+        user = request.user
+        user.medicines = userMedicines
+        user.save()
+    if request.method == "GET":
+        print("hello world")
+    return render(request, 'main/medicine_details.html', {
+        'medicine': Medicine.objects.get(pk=mid)
+    })
+    
+
 class MedicineDetailView(DetailView):
     model = Medicine
     template_name = 'main/medicine_details.html'
     
-def add_medicine(request, id, date):
+def add_medicine(request, id):
     
-    userMedicines = json.loads(request.user.medicines)
-    print(userMedicines)
-    userMedicines.append({"id":str(id),"made_on":str(date)})
-    print(userMedicines)
-    userMedicines = json.dumps(userMedicines)
-    print(userMedicines)
-    
-    user = request.user
-    user.medicines = userMedicines
-    user.save()
-    
+    if request.method == "POST":
+        userMedicines = json.loads(request.user.medicines)
+        print("METHOD------------------")
+        print(request.method)
+        userMedicines.append({"id":str(id),"made_on":0,"quantity":request.POST['quantity']})
+        userMedicines = json.dumps(userMedicines)
+        
+        user = request.user
+        user.medicines = userMedicines
+        user.save()
     return redirect('cabinet')
