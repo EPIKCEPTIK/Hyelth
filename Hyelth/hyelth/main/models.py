@@ -17,3 +17,10 @@ class CustomUser(AbstractUser):
     bio = models.TextField(blank=True)
     date_of_birth = models.DateField(null=True, blank=True)
     medicines = models.TextField(default="{}",blank=True)
+    
+class Prescriptions(models.Model):
+    number = models.CharField(max_length=13)
+    userID = models.IntegerField()
+    medicines = models.TextField(default="{}",blank=True)
+    doctorsNote = models.CharField(max_length=1000)
+    

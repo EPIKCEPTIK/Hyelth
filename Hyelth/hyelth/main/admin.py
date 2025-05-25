@@ -9,3 +9,4 @@ class FoundPostAdmin(admin.ModelAdmin):
     search_fields = ['name','expiration','quantity','category','description']
     
 admin.site.register(CustomUser)
+admin.site.register(Prescriptions)

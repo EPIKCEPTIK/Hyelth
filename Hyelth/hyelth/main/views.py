@@ -39,7 +39,17 @@ def schedule(request):
     
 @login_required(login_url='login')
 def prescriptions(request):
-    return render(request, 'main/prescriptions.html')
+    userid = request.user.id
+    
+    return render(request, 'main/prescriptions.html',{
+        'medicines': Prescriptions.objects.filter(id = userid)
+    })
+
+@login_required(login_url='login')
+def prescription(request,pk):
+    return render(request, 'main/prescription.html',{
+        'med': Prescriptions.objects.get(id = pk)
+    })
 
 @login_required(login_url='login')
 def find_medicine(request):
