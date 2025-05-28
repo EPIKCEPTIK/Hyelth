@@ -39,10 +39,10 @@ def schedule(request):
     
 @login_required(login_url='login')
 def prescriptions(request):
-    userid = request.user.id
-    
+    prescriptionsList = Prescriptions.objects.filter(id = request.user.id)
+    result = [{'id':med.id,'number':med.number,'medicines':', '.join({s['id'] for s in json.loads(med.medicines)})} for med in prescriptionsList]
     return render(request, 'main/prescriptions.html',{
-        'medicines': Prescriptions.objects.filter(id = userid)
+        'medicines': result
     })
 
 @login_required(login_url='login')
@@ -105,10 +105,6 @@ def MedicineDetail(request,mid):
         'medicine': Medicine.objects.get(pk=mid)
     })
     
-
-class MedicineDetailView(DetailView):
-    model = Medicine
-    template_name = 'main/medicine_details.html'
     
 def add_medicine(request, id):
     

@@ -29,6 +29,5 @@ urlpatterns = [
     path('login', views.login, name="login"),
     path('logout', views.user_logout, name="user_logout"),
     path('medicine/<int:mid>/', views.MedicineDetail, name='medicine_details'),
-    path('medicine/<int:mid>/',views.add_medicine, name="add_medicine")
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -171,9 +171,11 @@ body {
   .side-bar {
     width: 200px;
   }
+
   .medicine-card {
     width: 160px;
   }
+
   .medicine-card__image {
     width: 130px;
     height: 130px;
@@ -184,15 +186,17 @@ body {
   .content-wrapper {
     flex-direction: column;
   }
+
   .side-bar {
     width: 100%;
     order: 2;
   }
+
   .main {
     order: 1;
   }
+
   .frame-row {
     justify-content: center;
   }
 }
-
