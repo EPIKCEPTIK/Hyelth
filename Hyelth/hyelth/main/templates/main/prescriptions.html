@@ -8,14 +8,18 @@ Prescriptions
 <main class="main">
   <div class="frame-row">
     {% for med in medicines %}
-    <a href="{% url 'prescription' med.id%}">
-      <div class="">
-        <span class=""><b>
-            <h2>№{{ med.number }}</h2>
-          </b></span>
-        <span class="">{{ med.medicines }}</span>
-      </div>
-    </a>
+    <div class="prescription-card">
+      <a href="{% url 'prescription' med.id%}">
+        <div >
+          <span><b>
+              <h2>№{{ med.number }}</h2>
+            </b></span>
+          <span >{{ med.doctorName }}</span><br>
+          <span >{{ med.medicines }}</span>
+        </div>
+      </a>
+    </div>
+
     {% empty %}
     <p>Немає ліків у кабінеті.</p>
     {% endfor %}

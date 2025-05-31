@@ -24,7 +24,15 @@ def cabinet(request):
         print(result_dicts[i])
         print(userMedicines[i])
         result_dicts[i]['quantity'] = userMedicines[i]["quantity"]
-        result_dicts[i]['expiration'] = userMedicines[i]["made_on"]
+        dateMade = userMedicines[i]["made_on"]
+        expiration = Medicine.objects.get(id = userMedicines[i]["id"]).expiration
+        dateMade = dateMade.split(".")
+        expiration = expiration.split(".")
+        dates = [str(int(dateMade[i])+int(expiration[i])) for i in range(3)]
+        for m in range(len(dates)):
+            dates[m] = "0"+ dates[m] if len(dates[m])<=1 else dates[m]
+        resexp = ".".join(dates)
+        result_dicts[i]['expiration'] = resexp
     print(result_dicts)
     return render(request, 'main/cabinet.html', {
         'medicines': result_dicts
@@ -39,8 +47,17 @@ def schedule(request):
     
 @login_required(login_url='login')
 def prescriptions(request):
-    prescriptionsList = Prescriptions.objects.filter(id = request.user.id)
-    result = [{'id':med.id,'number':med.number,'medicines':', '.join({s['id'] for s in json.loads(med.medicines)})} for med in prescriptionsList]
+    prescriptionsList = Prescriptions.objects.filter(userID = request.user.id)
+    result = [{
+                'id':med.id,
+               'number':med.number,
+               'doctorName':med.prescribedBy,
+               'medicines':', '.join({(Medicine.objects.get(id=s['id']).name) for s in json.loads(med.medicines)})
+               } for med in prescriptionsList]
+    n = 20
+    for med in result:
+        if(len(med['medicines']) > n):
+            med['medicines'] = med['medicines'][:n-3]+"..."
     return render(request, 'main/prescriptions.html',{
         'medicines': result
     })
