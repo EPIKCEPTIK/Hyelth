@@ -1,0 +1,100 @@
+body {
+    display: flex;
+    justify-content: center;
+}
+
+.medicine {
+    margin: 20px 50px 0;
+    display: flex;
+    width: 95vw;
+    height: fit-content;
+    background-color: #93da96;
+    border-radius: 24px;
+}
+
+.left-side, .ride-side {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-content: end;
+    gap: 20px
+
+}
+
+.ride-side {
+    background-color: #ffffff;
+}
+
+.left-side .medicine-name {
+    margin: 20px 20px 0;
+    background-color: #ffffff;
+    border-radius: 24px;
+    padding: 10px;
+
+}
+
+.medicine-image {
+    display: flex;
+    justify-content: center;
+    align-content: end;
+    padding: 20px;
+
+}
+
+.medicine-image img {
+
+    width: fit-content;
+    height: fit-content;
+}
+
+
+.medicine-info {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    margin: 20px 20px 20px;
+    justify-content: center;
+    background-color: #ffffff;
+    border-radius: 24px;
+
+}
+
+.form {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px 20px 20px;
+    font-size: 30px;
+    font-weight: bold;
+    padding: 10px;
+    background-color: #ffffff;
+    border-radius: 24px;
+}
+
+.form input {
+    padding: 10px;
+    background-color: #eaeaea;
+    border-radius: 24px;
+    width: 10vw;
+    height: fit-content;
+    justify-content: center;
+    font-size: 30px;
+
+}
+
+.form button {
+    padding: 10px;
+    background-color: #a8ffab;
+    border-radius: 24px;
+    width: fit-content;
+    height: fit-content;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.exp-and-quan {
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 10px;
+    display: flex;
+    gap: 2vw;
+}

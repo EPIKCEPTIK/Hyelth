@@ -1,23 +1,60 @@
+{% load static %}
+<!DOCTYPE html>
 
-{% extends "main/base.html" %}
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}
+    {% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'main/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'main/css/medicine_detail.css' %}">
+</head>
+<body>
+<div class="site-cabinet">
 
-{% block title %}
-{{ med.name }}
-{% endblock %}
+    <header class="top-bar">
+        <a href="{% url 'find_medicine' %}"><h1 class="top-bar__title"><</h1></a>
+        <h1 class="top-bar__title">Hyelth</h1>
+        <a href="{% url 'user_logout' %}">Logout</a>
+    </header>
 
-{% block content%}
-<main>
-  {{ medicine.id }}
-  <h1>{{ medicine.name }}</h1>
-  <img src="{{ medicine.image.url }}" alt="{{ med.name }}" class="medicine-card__image">
-  <p>Кількість: {{ medicine.quantity }}</p>
-  <p>Детальна інформація: {{ medicine.description }}</p>
-  <p>Термін придатності: {{ medicine.expiration }}</p>
-  <form method="POST">
-    {% csrf_token %}
-    <input type="text" name="date">
-    <input type="number" name="quantity">
-    <button type="submit">Add Medicine</button>
-  </form>
-</main>
-  {% endblock %}
+    {% block content %}
+        <div class="medicine">
+            <div class="left-side">
+                <div class="medicine-name">
+                    <h1>{{ medicine.name }}</h1>
+                </div>
+                <div class="medicine-image">
+                    <img src="{{ medicine.image.url }}" alt="{{ med.name }}" class="medicine-card__image">
+                </div>
+            </div>
+            <div class="right-side">
+
+                <div class="form">
+                    <form method="POST">
+                        {% csrf_token %}
+                        <label for="date">Термін придатності: </label>
+                        <input type="text" name="date">
+                        <label for="number">Кількість: </label>
+                        <input type="number" name="quantity">
+                        <button type="submit">Додати ліки</button>
+                    </form>
+                </div>
+                <div class="medicine-info">
+
+                    <p>Детальна інформація: {{ medicine.description }}</p>
+                    <div class="exp-and-quan">
+                        <p>Термін придатності: {{ medicine.expiration }}</p>
+                        <p>Кількість: {{ medicine.quantity }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    {% endblock %}
+
+
+</body>
+</html>
+
+
