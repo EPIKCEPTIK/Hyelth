@@ -110,7 +110,7 @@ def MedicineDetail(request,mid):
         userMedicines = json.loads(request.user.medicines)
         print("METHOD------------------")
         print(request.method)
-        userMedicines.append({"id":str(mid),"made_on":0,"quantity":request.POST['quantity']})
+        userMedicines.append({"id":str(mid),"made_on":"0000.00.00","quantity":request.POST['quantity']})
         userMedicines = json.dumps(userMedicines)
         
         user = request.user
