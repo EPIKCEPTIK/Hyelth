@@ -4,9 +4,9 @@ body {
 }
 
 .medicine {
-    margin: 20px 0 20px;
+    margin: 20px 20px 20px;
     display: flex;
-    width: 100vw;
+    width: calc(100vw - 40px);
     height: fit-content;
     background-color: #93da96;
     border-radius: 24px;
