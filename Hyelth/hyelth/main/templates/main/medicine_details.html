@@ -1,22 +1,8 @@
-{% load static %}
-<!DOCTYPE html>
+{% extends "main/base_detail.html" %}
 
-<html lang="uk">
-<head>
-    <meta charset="UTF-8">
-    <title>{% block title %}
-    {% endblock %}</title>
-    <link rel="stylesheet" href="{% static 'main/css/style.css' %}">
-    <link rel="stylesheet" href="{% static 'main/css/medicine_detail.css' %}">
-</head>
-<body>
-<div class="site-cabinet">
-
-    <header class="top-bar">
-        <a href="javascript:history.go(-1)">back</a>
-        <h1 class="top-bar__title">Hyelth</h1>
-        <a href="{% url 'user_logout' %}">Logout</a>
-    </header>
+{% block title %}
+{{ medicine.name }}
+{% endblock %}
 
     {% block content %}
         <div class="medicine">
@@ -40,7 +26,7 @@
                         <button type="submit">Додати ліки</button>
                     </form>
                 </div>
-                <div class="medicine-info">
+                <div class="description">
 
                     <p>Детальна інформація: {{ medicine.description }}</p>
                     <div class="exp-and-quan">
@@ -54,7 +40,5 @@
     {% endblock %}
 
 
-</body>
-</html>
 
 

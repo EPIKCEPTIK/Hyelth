@@ -64,6 +64,7 @@ def prescriptions(request):
 
 @login_required(login_url='login')
 def prescription(request,pk):
+
     return render(request, 'main/prescription.html',{
         'med': Prescriptions.objects.get(id = pk)
     })

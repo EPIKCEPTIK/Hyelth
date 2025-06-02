@@ -1,11 +1,36 @@
-{% extends "main/base.html" %}
+{% extends "main/base_detail.html" %}
 
 {% block title %}
-Prescriptions
+    Prescriptions
 {% endblock %}
 
-{% block content%}
-<main class="main">
-  <p>{{med.medicines}}</p>
-</main>
+{% block content %}
+    <div class="medicine">
+        <div class="left-side">
+            <div class="prescription">
+                <h1>№{{ med.number }}</h1>
+                <h1>Doctor: {{ med.prescribedBy }}</h1>
+            </div>
+            <div class="description">
+                <p>{{ med.doctorsNote }}</p>
+            </div>
+        </div>
+        <div class="right-side">
+
+        </div>
+        <div class="right-side">
+            <div class="medicine-card">
+                <img src="{{ med.image.url }}" alt="{{ med.name }}" class="medicine-card__image">
+                <div class="medicine-card__name"><a href="{% url 'medicine_details' med.id %}">{{ med.name }}</a></div>
+                <div class="medicine-card__info">
+                    <span class="medicine-card__label">Exp:</span>
+                    <span class="medicine-card__value">{{ med.medicine.expiration|date:"d.m.Y" }}</span>
+                </div>
+                <div class="medicine-card__info">
+                    <span class="medicine-card__label">Qty:</span>
+                    <span class="medicine-card__value">{{ med.quantity }}</span>
+                </div>
+            </div>
+        </div>
+
 {% endblock %}

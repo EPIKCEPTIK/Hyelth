@@ -1,0 +1,25 @@
+{% load static %}
+<!DOCTYPE html>
+
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}
+    {% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'main/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'main/css/medicine_detail.css' %}">
+</head>
+<body>
+<div class="site-cabinet">
+
+    <header class="top-bar">
+        <a href="javascript:history.go(-1)">back</a>
+        <h1 class="top-bar__title">Hyelth</h1>
+        <a href="{% url 'user_logout' %}">Logout</a>
+    </header>
+
+    {% block content %}
+    {% endblock %}
+</div>
+</body>
+</html>
