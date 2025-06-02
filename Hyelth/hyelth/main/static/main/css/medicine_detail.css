@@ -20,7 +20,13 @@ body {
     gap: 20px
 
 }
+.right-side-pr {
+    display: flex;
+    flex-direction: row;
 
+    align-content: end;
+    gap: 20px
+}
 
 
 .left-side .medicine-name {
@@ -103,6 +109,6 @@ body {
     border-radius: 24px;
     padding: 10px;
 }
-.right-side .medicine-card{
+.right-side-pr .medicine-card{
     margin: 20px 20px 20px;
 }
