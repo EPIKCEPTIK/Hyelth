@@ -50,11 +50,11 @@ def prescriptions(request):
     prescriptionsList = Prescriptions.objects.filter(userID = request.user.id)
     result = [{
                 'id':med.id,
-               'number':med.number,
-               'doctorName':med.prescribedBy,
-               'medicines':', '.join({(Medicine.objects.get(id=s['id']).name) for s in json.loads(med.medicines)})
-               } for med in prescriptionsList]
-    n = 20
+                'number':med.number,
+                'doctorName':med.prescribedBy,
+                'medicines':', '.join({(Medicine.objects.get(id=s['id']).name) for s in json.loads(med.medicines)})
+                } for med in prescriptionsList]
+    n = 30
     for med in result:
         if(len(med['medicines']) > n):
             med['medicines'] = med['medicines'][:n-3]+"..."
