@@ -4,9 +4,9 @@ body {
 }
 
 .medicine {
-    margin: 20px 50px 0;
+    margin: 20px 0 20px;
     display: flex;
-
+    width: 100vw;
     height: fit-content;
     background-color: #93da96;
     border-radius: 24px;
@@ -15,15 +15,12 @@ body {
 .left-side, .right-side {
     display: flex;
     flex-direction: column;
-
     align-content: end;
     gap: 20px
-
 }
 .right-side-pr {
     display: flex;
     flex-direction: row;
-
     align-content: end;
     gap: 20px
 }
@@ -34,7 +31,6 @@ body {
     background-color: #ffffff;
     border-radius: 24px;
     padding: 10px;
-
 }
 
 .left-side .medicine-image {
@@ -42,11 +38,9 @@ body {
     justify-content: center;
     align-content: end;
     padding: 20px;
-
 }
 
 .left-side .medicine-image img {
-
     width: fit-content;
     height: fit-content;
 }
