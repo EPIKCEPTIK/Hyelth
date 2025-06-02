@@ -8,17 +8,19 @@
     <div class="medicine">
         <div class="left-side">
             <div class="prescription">
-                <h1>№{{ med.number }}</h1>
-                <h1>Doctor: {{ med.prescribedBy }}</h1>
+                <h1>№{{ pr.number }}</h1>
+                <h1>Doctor: {{ pr.prescribedBy }}</h1>
             </div>
             <div class="description">
-                <p>{{ med.doctorsNote }}</p>
+                <p>{{ pr.doctorsNote }}</p>
             </div>
         </div>
         <div class="right-side">
 
         </div>
         <div class="right-side">
+            {{med}}
+            {% for med in meds %}
             <div class="medicine-card">
                 <img src="{{ med.image.url }}" alt="{{ med.name }}" class="medicine-card__image">
                 <div class="medicine-card__name"><a href="{% url 'medicine_details' med.id %}">{{ med.name }}</a></div>
@@ -31,6 +33,9 @@
                     <span class="medicine-card__value">{{ med.quantity }}</span>
                 </div>
             </div>
+            {% empty %}
+            <p>Немає ліків у рецепті.</p>
+            {% endfor %}
         </div>
 
 {% endblock %}

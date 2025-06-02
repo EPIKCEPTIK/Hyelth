@@ -65,8 +65,14 @@ def prescriptions(request):
 @login_required(login_url='login')
 def prescription(request,pk):
 
+    pres = Prescriptions.objects.get(id = pk)
+    medsJ = json.loads(pres.medicines)
+    print(medsJ)
+    meds = [Medicine.objects.get(id = i['id']) for i in medsJ]
+    print(meds)
     return render(request, 'main/prescription.html',{
-        'med': Prescriptions.objects.get(id = pk)
+        'pr': Prescriptions.objects.get(id = pk),
+        'meds':meds
     })
 
 @login_required(login_url='login')
