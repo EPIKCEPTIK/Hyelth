@@ -1,2 +1,2 @@
 # Hyelth
-Hyelth for Yebana Scherbyna
+Hyelth for PPPI
